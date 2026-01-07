@@ -4,10 +4,8 @@ import { View, Text, StyleSheet } from "react-native";
 export default function SuccessScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>✅ Issue Created</Text>
-      <Text style={styles.text}>
-        Your issue has been successfully created.
-      </Text>
+      <Text style={styles.title}>Issue Created ✅</Text>
+      <Text style={styles.text}>Your issue has been successfully created.</Text>
     </View>
   );
 }
@@ -15,19 +13,17 @@ export default function SuccessScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0b1020",
+    backgroundColor: "#0B0F1A",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
   },
   title: {
+    color: "#7CFF9E",
     fontSize: 26,
-    color: "#7c4dff",
     fontWeight: "700",
     marginBottom: 10,
   },
   text: {
-    color: "#ccc",
-    textAlign: "center",
+    color: "#B0B6C9",
   },
 });
