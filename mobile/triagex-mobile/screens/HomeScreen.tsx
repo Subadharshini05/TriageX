@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function HomeScreen({ navigation }: any) {
+export default function HomeScreen() {
+  const navigation = useNavigation<any>();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>TriageX</Text>
-      <Text style={styles.subtitle}>
-        AI-powered bug triage made simple
-      </Text>
+      <Text style={styles.subTitle}>AI-powered bug triage</Text>
 
       <TouchableOpacity
         style={styles.button}
@@ -22,7 +23,7 @@ export default function HomeScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0b1020",
+    backgroundColor: "#0b0f1a",
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
@@ -30,19 +31,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "700",
-    color: "#b388ff",
-    marginBottom: 10,
+    color: "#a855f7",
+    marginBottom: 8,
   },
-  subtitle: {
+  subTitle: {
     color: "#aaa",
-    marginBottom: 30,
-    textAlign: "center",
+    marginBottom: 40,
   },
   button: {
-    backgroundColor: "#7c4dff",
+    backgroundColor: "#7c3aed",
     paddingVertical: 16,
-    paddingHorizontal: 30,
-    borderRadius: 16,
+    paddingHorizontal: 28,
+    borderRadius: 18,
   },
   buttonText: {
     color: "#fff",
