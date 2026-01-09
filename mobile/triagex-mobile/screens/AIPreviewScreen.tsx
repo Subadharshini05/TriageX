@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function AIPreviewScreen() {
   const navigation = useNavigation<any>();
+  const [loading, setLoading] = useState(false);
+
+  const handleConfirm = () => {
+    setLoading(true);
+    // fake AI processing
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("Success");
+    }, 1500);
+  };
 
   return (
     <View style={styles.container}>
@@ -53,36 +64,29 @@ export default function AIPreviewScreen() {
         </View>
       </ScrollView>
 
-      {/* 🔥 THIS IS IMPORTANT */}
       <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Success")}
+        style={[styles.button, loading && { opacity: 0.7 }]}
+        onPress={handleConfirm}
+        disabled={loading}
       >
-        <Text style={styles.buttonText}>Confirm & Create Issue</Text>
+        {loading ? (
+          <>
+            <ActivityIndicator color="#fff" />
+            <Text style={styles.loadingText}>AI analysing…</Text>
+          </>
+        ) : (
+          <Text style={styles.buttonText}>Confirm & Create Issue</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#0b0f1a",
-  },
-  content: {
-    padding: 20,
-    paddingBottom: 120,
-  },
-  header: {
-    fontSize: 24,
-    color: "#a855f7",
-    fontWeight: "700",
-    marginBottom: 6,
-  },
-  subHeader: {
-    color: "#aaa",
-    marginBottom: 16,
-  },
+  container: { flex: 1, backgroundColor: "#0b0f1a" },
+  content: { padding: 20, paddingBottom: 120 },
+  header: { fontSize: 24, color: "#a855f7", fontWeight: "700", marginBottom: 6 },
+  subHeader: { color: "#aaa", marginBottom: 16 },
   cardWarning: {
     backgroundColor: "#1a2238",
     borderRadius: 16,
@@ -91,43 +95,24 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     borderLeftColor: "#facc15",
   },
-  warnTitle: {
-    color: "#facc15",
-    fontWeight: "700",
-    marginBottom: 4,
-  },
-  warnText: {
-    color: "#ddd",
-  },
+  warnTitle: { color: "#facc15", fontWeight: "700", marginBottom: 4 },
+  warnText: { color: "#ddd" },
   card: {
     backgroundColor: "#151b2e",
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
   },
-  label: {
-    color: "#777",
-    fontSize: 12,
-    marginBottom: 4,
-  },
-  value: {
-    color: "#fff",
-    fontSize: 15,
-  },
-  row: {
-    flexDirection: "row",
-    gap: 12,
-  },
+  label: { color: "#777", fontSize: 12, marginBottom: 4 },
+  value: { color: "#fff", fontSize: 15 },
+  row: { flexDirection: "row", gap: 12 },
   smallCard: {
     flex: 1,
     backgroundColor: "#151b2e",
     borderRadius: 16,
     padding: 16,
   },
-  severity: {
-    color: "#ef4444",
-    fontWeight: "700",
-  },
+  severity: { color: "#ef4444", fontWeight: "700" },
   button: {
     position: "absolute",
     bottom: 24,
@@ -138,9 +123,6 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     alignItems: "center",
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "700",
-  },
+  buttonText: { color: "#fff", fontSize: 16, fontWeight: "700" },
+  loadingText: { color: "#fff", marginTop: 6, fontWeight: "600" },
 });
