@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function AIPreviewScreen() {
@@ -8,50 +14,51 @@ export default function AIPreviewScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.heading}>AI Preview</Text>
-        <Text style={styles.sub}>
+        <Text style={styles.header}>AI Preview</Text>
+        <Text style={styles.subHeader}>
           Review the structured issue before creating it
         </Text>
 
-        <View style={styles.card}>
-          <Text style={styles.warn}>Possible Duplicate Detected</Text>
-          <Text style={styles.text}>
-            Similar issue found: "App crashes on login when network is unstable"
+        <View style={styles.cardWarning}>
+          <Text style={styles.warnTitle}>Possible Duplicate Detected</Text>
+          <Text style={styles.warnText}>
+            Similar issue found: “App crashes on login when network is unstable”
           </Text>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.label}>TITLE</Text>
-          <Text style={styles.text}>Login crash on poor network</Text>
+          <Text style={styles.value}>Login crash on poor network</Text>
         </View>
 
         <View style={styles.card}>
           <Text style={styles.label}>STEPS TO REPRODUCE</Text>
-          <Text style={styles.text}>1. Open the app</Text>
-          <Text style={styles.text}>2. Enter valid credentials</Text>
-          <Text style={styles.text}>3. Toggle network on/off</Text>
-          <Text style={styles.text}>4. Tap Login</Text>
+          <Text style={styles.value}>
+            1. Open the app{"\n"}
+            2. Enter valid credentials{"\n"}
+            3. Toggle network on/off{"\n"}
+            4. Tap Login
+          </Text>
         </View>
 
         <View style={styles.row}>
           <View style={styles.smallCard}>
             <Text style={styles.label}>SEVERITY</Text>
-            <Text style={{ color: "red" }}>High</Text>
+            <Text style={styles.severity}>High</Text>
           </View>
-
           <View style={styles.smallCard}>
             <Text style={styles.label}>ENVIRONMENT</Text>
-            <Text style={styles.text}>Android · v1.0.0</Text>
+            <Text style={styles.value}>Android · v1.0.0</Text>
           </View>
         </View>
       </ScrollView>
 
-      {/* 🔥 THIS IS THE IMPORTANT PART */}
+      {/* 🔥 THIS IS IMPORTANT */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Success")}
       >
-        <Text style={styles.btnText}>Confirm & Create Issue</Text>
+        <Text style={styles.buttonText}>Confirm & Create Issue</Text>
       </TouchableOpacity>
     </View>
   );
@@ -63,36 +70,49 @@ const styles = StyleSheet.create({
     backgroundColor: "#0b0f1a",
   },
   content: {
-    padding: 16,
+    padding: 20,
     paddingBottom: 120,
   },
-  heading: {
+  header: {
     fontSize: 24,
     color: "#a855f7",
     fontWeight: "700",
+    marginBottom: 6,
   },
-  sub: {
+  subHeader: {
     color: "#aaa",
     marginBottom: 16,
   },
-  card: {
-    backgroundColor: "#141a2b",
-    padding: 16,
+  cardWarning: {
+    backgroundColor: "#1a2238",
     borderRadius: 16,
-    marginBottom: 12,
+    padding: 16,
+    marginBottom: 16,
+    borderLeftWidth: 4,
+    borderLeftColor: "#facc15",
   },
-  warn: {
+  warnTitle: {
     color: "#facc15",
-    fontWeight: "600",
+    fontWeight: "700",
     marginBottom: 4,
+  },
+  warnText: {
+    color: "#ddd",
+  },
+  card: {
+    backgroundColor: "#151b2e",
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
   },
   label: {
     color: "#777",
     fontSize: 12,
     marginBottom: 4,
   },
-  text: {
-    color: "#eee",
+  value: {
+    color: "#fff",
+    fontSize: 15,
   },
   row: {
     flexDirection: "row",
@@ -100,21 +120,25 @@ const styles = StyleSheet.create({
   },
   smallCard: {
     flex: 1,
-    backgroundColor: "#141a2b",
-    padding: 16,
+    backgroundColor: "#151b2e",
     borderRadius: 16,
+    padding: 16,
+  },
+  severity: {
+    color: "#ef4444",
+    fontWeight: "700",
   },
   button: {
     position: "absolute",
     bottom: 24,
-    left: 16,
-    right: 16,
+    left: 20,
+    right: 20,
     backgroundColor: "#7c3aed",
     paddingVertical: 16,
-    borderRadius: 14,
+    borderRadius: 18,
     alignItems: "center",
   },
-  btnText: {
+  buttonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "700",
